@@ -692,6 +692,14 @@ footer .foot-content .social .foot i {
   cursor: pointer;
   border-radius: 5px;
 }
+@media (max-width: 767px) {
+  footer .foot-content .social .foot i {
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+  }
+}
 footer .foot-content .social .foot:nth-child(1) i:hover {
   background-image: linear-gradient(to bottom, #ea4335, #34a853);
   color: white;
