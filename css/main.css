@@ -140,11 +140,11 @@ header .container::after {
 header .container .logo {
   color: var(--main-color);
   text-decoration: none;
+  width: 100%;
   font-size: 25px;
 }
 @media (max-width: 991px) {
   header .container .logo {
-    width: 100%;
     text-align: center;
     margin: 20px auto 0;
   }
@@ -174,7 +174,7 @@ header .container nav ul li a {
 }
 @media (max-width: 991px) {
   header .container nav ul li a {
-    padding: 15px;
+    padding: 8px;
   }
 }
 header .container nav ul li a::before {
@@ -322,7 +322,7 @@ header .container nav ul li a:hover {
 }
 @media (max-width: 767px) {
   .education .container .education-content {
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   }
 }
 .education .container .education-content .box {
@@ -553,6 +553,7 @@ header .container nav ul li a:hover {
 }
 @media (max-width: 767px) {
   .skills .skills-content .skill > .box:last-of-type > .prog span::before {
+    top: 1px;
     right: -50px;
   }
 }
@@ -668,6 +669,7 @@ footer .foot-content .address {
   footer .foot-content .social,
   footer .foot-content .address {
     flex-basis: 100%;
+    padding: 0;
   }
 }
 footer .foot-content .social .foot {
