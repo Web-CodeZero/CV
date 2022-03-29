@@ -18,6 +18,9 @@ html {
 ul {
   list-style: none;
 }
+body {
+  font-family: "Cairo", sans-serif;
+}
 .container {
   padding-left: 15px;
   padding-right: 15px;
@@ -46,61 +49,53 @@ ul {
   text-align: center;
   width: fit-content;
   position: relative;
+  padding: 10px;
   margin: 0 auto 80px;
   border: 2px solid black;
   transition: var(--main-transition);
   z-index: 2;
   cursor: pointer;
 }
-.main-heading::before {
-  content: "";
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  left: -25px;
-  top: 50%;
-  transform: translateY(-50%);
-  border-radius: 50%;
-  background-color: var(--main-color);
-  transition: var(--main-transition);
-}
+.main-heading::before,
 .main-heading::after {
   content: "";
   position: absolute;
-  width: 15px;
-  height: 15px;
-  right: -25px;
+  width: 13px;
+  height: 13px;
   top: 50%;
   transform: translateY(-50%);
   border-radius: 50%;
   background-color: var(--main-color);
   transition: var(--main-transition);
 }
+.main-heading::before {
+  left: -25px;
+  animation: playleft 1.1s linear infinite;
+}
+.main-heading::after {
+  right: -25px;
+  animation: playright 1.1s linear infinite;
+}
 .main-heading:hover::before,
 .main-heading:hover::after {
-  width: 49.5%;
-  border-radius: 0;
-  height: 100%;
   background-color: var(--main-color-alt);
   z-index: -1;
 }
 .main-heading:hover::before {
-  left: 0;
+  animation: go-left var(--main-transition) linear forwards;
 }
 .main-heading:hover::after {
-  right: 0;
+  animation: go-right var(--main-transition) linear forwards;
 }
 .main-heading h3 {
   font-weight: normal;
   text-transform: uppercase;
   font-size: 30px;
-  width: fit-content;
-  padding: 10px;
-  transition: var(--main-transition);
 }
 .main-heading:hover {
   color: white;
   border: 2px solid white;
+  transition-delay: var(--main-transition);
 }
 .note {
   background-color: pink;
@@ -125,28 +120,33 @@ header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   position: relative;
   min-height: 72px;
+}
+@media (max-width: 767px) {
+  header .container {
+    flex-wrap: wrap;
+  }
 }
 header .container::after {
   content: "";
   position: absolute;
   width: calc(100% - 30px);
+  left: 15px;
   height: 1px;
-  background-color: #ddd;
+  background-color: var(--main-color-alt);
   bottom: 0;
 }
 header .container .logo {
   color: var(--main-color);
   text-decoration: none;
-  width: 100%;
   font-size: 25px;
 }
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   header .container .logo {
     text-align: center;
     margin: 20px auto 0;
+    width: 100%;
   }
 }
 header .container nav {
@@ -174,7 +174,7 @@ header .container nav ul li a {
 }
 @media (max-width: 991px) {
   header .container nav ul li a {
-    padding: 8px;
+    padding: 7px;
   }
 }
 header .container nav ul li a::before {
@@ -243,27 +243,13 @@ header .container nav ul li a:hover {
 }
 .landing .container .obj p {
   line-height: 1.5;
-  font-size: 19px;
+  font-size: 18px;
   color: #444;
   text-transform: capitalize;
 }
 .landing .container .image {
   position: relative;
   overflow: hidden;
-}
-.landing .container .image::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 99%;
-  border-radius: 20px;
-  background-color: rgba(0, 0, 0, 50%);
-  transition: var(--main-transition);
-}
-.landing .container .image:hover::before {
-  left: -100%;
 }
 @media (max-width: 767px) {
   .landing .container .image {
@@ -274,10 +260,6 @@ header .container nav ul li a:hover {
 .landing .container .image img {
   width: 250px;
   border-radius: 20px;
-  transition: var(--main-transition);
-}
-.landing .container .image:hover img {
-  width: 325px;
 }
 .landing .go-down {
   position: absolute;
@@ -295,20 +277,6 @@ header .container nav ul li a:hover {
 .landing .go-down i {
   animation: bouncing 1.5s infinite;
 }
-@keyframes bouncing {
-  0%,
-  10%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
-  }
-  40%,
-  60% {
-    transform: translateY(-30%);
-  }
-}
 /* end landing */
 /* start education */
 .education {
@@ -322,7 +290,7 @@ header .container nav ul li a:hover {
 }
 @media (max-width: 767px) {
   .education .container .education-content {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
 }
 .education .container .education-content .box {
@@ -378,6 +346,35 @@ header .container nav ul li a:hover {
   position: relative;
   overflow: hidden;
 }
+.languages .language .lang::before,
+.languages .language .lang::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background-color: var(--main-color);
+  transition: var(--main-transition);
+}
+@media (max-width: 767px) {
+  .languages .language .lang::before,
+  .languages .language .lang::after {
+    width: 1px;
+  }
+}
+.languages .language .lang::before {
+  left: 0;
+  bottom: -100%;
+}
+.languages .language .lang::after {
+  top: -100%;
+  right: 0;
+}
+.languages .language .lang:hover::before {
+  bottom: 0;
+}
+.languages .language .lang:hover::after {
+  top: 0;
+}
 .languages .language .lang:hover {
   background-color: white;
 }
@@ -394,7 +391,7 @@ header .container nav ul li a:hover {
   content: "";
   position: absolute;
   top: 0;
-  left: 0;
+  left: 2px;
   width: 100%;
   height: 100%;
   z-index: 99;
@@ -405,11 +402,13 @@ header .container nav ul li a:hover {
 }
 .languages .language .lang:nth-child(2) .text::before {
   background-color: #ffc942;
+  height: 103%;
 }
 .languages .language .lang:nth-child(3) .text::before {
   background-color: #50b5c7;
 }
 .languages .language .lang:hover .text::before {
+  /* transition-delay: 0.3s; */
   left: -100%;
   z-index: -1;
 }
@@ -420,6 +419,7 @@ header .container nav ul li a:hover {
   color: #333;
 }
 .languages .language .lang .text p {
+  font-size: 19px;
   margin-bottom: 10px;
   color: #777;
 }
@@ -460,6 +460,7 @@ header .container nav ul li a:hover {
 }
 .languages .language .lang:nth-child(3) .text .prog span::before {
   border: 1px solid #50b5c7;
+  right: -25px;
 }
 .languages .language .lang .text .prog span::after {
   content: "";
@@ -579,23 +580,28 @@ header .container nav ul li a:hover {
   background-color: #f6f6f6;
 }
 .works .work-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  grid-gap: 30px;
+}
+@media (max-width: 767px) {
+  .works .work-content {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
 }
 .works .work-content .work {
   background-color: white;
   padding: 10px;
-  flex-basis: 100%;
 }
-@media (min-width: 992px) {
+/* @media (min-width: 992px) {
   .works .work-content .work {
     flex-basis: 49%;
   }
-}
-.works .work-content .work img {
+} */
+.works .work-content .work .image img {
+  width: 100%;
   max-width: 100%;
-  height: 300px;
+  /* height: 300px; */
 }
 .works .work-content .work h3 {
   margin: 5px 0;
@@ -628,6 +634,10 @@ header .container nav ul li a:hover {
   border: 1px solid #19c8fa;
   color: #19c8fa;
 }
+.works .work-content .work .visit.montreal {
+  border: 1px solid #eed022;
+  color: #eed022;
+}
 .works .work-content .work .visit.linkleon:hover {
   color: white;
   background-color: #10cab7;
@@ -636,6 +646,11 @@ header .container nav ul li a:hover {
 .works .work-content .work .visit.kasper:hover {
   color: white;
   background-color: #19c8fa;
+  border: 1px solid white;
+}
+.works .work-content .work .visit.montreal:hover {
+  color: white;
+  background-color: #eed022;
   border: 1px solid white;
 }
 .works .work-content .note {
@@ -742,3 +757,69 @@ footer .foot-content .address .foot i {
   border-radius: 5px;
 }
 /* end footer  */
+/* start animation */
+@keyframes playleft {
+  0%,
+  100% {
+    left: -25px;
+  }
+  50% {
+    left: -35px;
+  }
+  75% {
+    left: -30px;
+  }
+}
+@keyframes playright {
+  0%,
+  100% {
+    right: -25px;
+  }
+  50% {
+    right: -35px;
+  }
+  75% {
+    right: -30px;
+  }
+}
+@keyframes bouncing {
+  0%,
+  10%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40%,
+  60% {
+    transform: translateY(-30%);
+  }
+}
+@keyframes go-left {
+  50% {
+    left: 0;
+    width: 15px;
+    height: 15px;
+  }
+  100% {
+    left: 0;
+    width: 50%;
+    border-radius: 0;
+    height: 100%;
+  }
+}
+@keyframes go-right {
+  50% {
+    right: 0;
+    width: 15px;
+    height: 15px;
+  }
+  100% {
+    right: 0;
+    width: 50%;
+    border-radius: 0;
+    height: 100%;
+  }
+}
+/* end animation */
